@@ -1,0 +1,4 @@
+MONGO_URI=mongodb+srv://<username>:<password>@<database-name>.pow4n.mongodb.net/?retryWrites=true&w=majority
+CLIENT_URI=http://localhost:3000
+JWT_SECRET=34567890fghq67tdfd654567t8
+PORT=2000

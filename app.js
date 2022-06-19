@@ -1,6 +1,8 @@
 const express =  require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+require('dotenv').config();
+require('./db/db');
 
 // bootstrap the app
 const app = express();
@@ -9,7 +11,7 @@ const PORT = process.env.PORT || 4500;
 
 // app middleware
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: process.env.CLIENT_URI
 }))
 app.use(morgan('dev'));
 
@@ -20,4 +22,5 @@ app.get('/', async(req, res) => {
 
 app.listen(PORT, async () => {
     await console.log(`Server is running on port ${PORT}`);
+    require('./db/db');
 })
