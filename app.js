@@ -18,9 +18,18 @@ if(process.env.NODE_ENV === 'development'){
 
 // app routes
 const authRoutes = require('./routes/auth.route');
+const productRoutes =  require('./routes/product.route');
+const impactRoutes =  require('./routes/impact.route');
+const teamRoutes =  require('./routes/team.route');
+const partnerRoutes =  require('./routes/partner.route');
 
 // middleware
 app.use('/api/v1', authRoutes);
+app.use('/api/v1', productRoutes);
+app.use('/api/v1', teamRoutes);
+app.use('/api/v1', partnerRoutes);
+app.use('/api/v1', impactRoutes);
+
 app.get('/', async(req, res) => { 
     res.send('Uptech Agro API responding successfully');
 });
