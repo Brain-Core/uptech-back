@@ -10,12 +10,17 @@ const app = express();
 const PORT = process.env.PORT || 4500;
 
 // app middleware
-app.use(cors({
-    origin: process.env.CLIENT_URI
-}))
+app.use(express.json());
 app.use(morgan('dev'));
+if(process.env.NODE_ENV === 'development'){
+    app.use(cors({origin: `${process.env.CLIENT_URI}`}))
+}
 
 // app routes
+const authRoutes = require('./routes/auth.route');
+
+// middleware
+app.use('/api/v1', authRoutes);
 app.get('/', async(req, res) => { 
     res.send('Uptech Agro API responding successfully');
 });
