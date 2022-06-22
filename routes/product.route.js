@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const { create, update, findAll, findOne} = require('../controllers/product.controller');
+const auth = require('../middlewares/auth');
+const { create, update, findAll, findOne} = require('../controllers/product.controller');
 
-router.post('/products', create);
-router.put('/products', update);
-router.get('/products', findAll);
-router.get('/products/:id', findOne);
+router.post('/', auth, create);
+router.put('/', auth, update);
+router.get('/', auth, findAll);
+router.get('/:id', auth, findOne);
 
 module.exports = router;

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const { create, update, findAll, findOne} = require('../controllers/impact.controller');
+const auth = require('../middlewares/auth');
+const { create, update, findAll, findOne} = require('../controllers/impact.controller');
 
-router.post('/impact', create);
-router.put('/impact', update);
-router.get('/impact', findAll);
-router.get('/impact/:id', findOne);
+router.post('/',auth, create);
+router.put('/', auth, update);
+router.get('/', auth, findAll);
+router.get('/:id', auth, findOne);
 
 module.exports = router;

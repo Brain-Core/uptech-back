@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-// const { create, update, findAll, findOne} = require('../controllers/team.controller');
+const auth = require('../middlewares/auth');
+const { create, update, findAll, findOne} = require('../controllers/team.controller');
 
-router.post('/team', create);
-router.put('/team', update);
-router.get('/team', findAll);
-router.get('/team/:id', findOne);
+router.post('/', auth, create);
+router.put('/', auth, update);
+router.get('/', auth, findAll);
+router.get('/:id', auth, findOne);
 
 module.exports = router;
