@@ -23,14 +23,12 @@ exports.create = async (req, res, next) => {
 exports.update = async (req, res) => {
     try {
         const impactPayload = {
-            ...req.body,
+            title: req.body.title,
+            description: req.body.description,
             photo: req.file.path
         };       
-        const updatedImpact = await Person.findByIdAndUpdate({_id: req.params.id}, impactPayload, {new: true});
-        
-        Impact.updateOne({ _id: req.params.id }, { ...updatedImpact })
-            .then(() => res.status(200).json({ message: 'Impact modifié avec succès !' }))
-            .catch(error => res.status(400).json({ error }));
+        const updatedImpact = await Impact.findByIdAndUpdate({_id: req.params.id}, impactPayload, {new: true});
+        return res.send(updatedImpact);
 
     } catch (error) {
         return res.status(400).json({
