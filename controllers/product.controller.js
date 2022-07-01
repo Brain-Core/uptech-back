@@ -8,7 +8,7 @@ exports.create = async(req, res) => {
             photo: req.file.path
         }).save();
         return res.status(201).json({
-            msg: 'Procuct created successfully',
+            msg: 'Product created successfully',
             product: newProduct
         });
     } catch (error) {
