@@ -3,8 +3,17 @@ const Product = require('../models/product.model');
 exports.create = async(req, res) => {
     const { name, photo } = req.body;
 
+    console.log('req.file.path :>> ', req.file.path);
+
     try {
-        
+        const newProduct = new Product({
+            name,
+            photo: req.file.path
+        }).save();
+        return res.status(201).json({
+            msg: 'Procuct created successfully',
+            product: newProduct
+        });
     } catch (error) {
         return res.status(400).json({
             error: error.message
@@ -14,7 +23,12 @@ exports.create = async(req, res) => {
 
 exports.update = async(req, res) => {
     try {
-        
+        const productPayload = {
+            name: req.body.name,
+            photo: req.file.path
+        };       
+        const updatedProduct = await Person.findByIdAndUpdate({_id: req.params.id}, productPayload, {new: true});
+        return res.send(updatedProduct);
     } catch (error) {
         return res.status(400).json({
             error: error.message
