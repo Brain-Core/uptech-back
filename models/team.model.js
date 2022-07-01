@@ -21,12 +21,9 @@ const TeamSchema = mongoose.Schema({
         type: String, 
         required: true
     },
-    avatar:{
+    photo:{
         type: String,
         required: true
-    },
-    cloud_id:{
-        type: String
     }
 });
 
