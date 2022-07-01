@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({origin: `${process.env.CLIENT_URI}`}))
 }
+app.use(cors({origin: '*'}))
 
 // middleware
 app.use('/api/auth/', require('./routes/auth.route'));
@@ -24,10 +25,10 @@ app.use('/api/products', require('./routes/product.route'));
 app.use('/api/team/', require('./routes/team.route'));
 app.use('/api/partner', require('./routes/partner.route'));
 app.use('/api/impact', require('./routes/impact.route'));
-
-app.get('/', async(req, res) => { 
-    res.send('Uptech-agro API responding successfully');
+app.use('/', (req, res) => {
+    res.status(200).json('Uptech-agro API responding successfully ...');
 });
+
 
 app.listen(PORT, async () => {
     await console.log(`Server is running on port ${PORT}`);
