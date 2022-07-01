@@ -2,9 +2,6 @@ const Product = require('../models/product.model');
 
 exports.create = async(req, res) => {
     const { name, photo } = req.body;
-
-    console.log('req.file.path :>> ', req.file.path);
-
     try {
         const newProduct = new Product({
             name,
@@ -27,7 +24,7 @@ exports.update = async(req, res) => {
             name: req.body.name,
             photo: req.file.path
         };       
-        const updatedProduct = await Person.findByIdAndUpdate({_id: req.params.id}, productPayload, {new: true});
+        const updatedProduct = await Product.findByIdAndUpdate({_id: req.params.id}, productPayload, {new: true});
         return res.send(updatedProduct);
     } catch (error) {
         return res.status(400).json({

@@ -2,13 +2,12 @@ const Impact = require('../models/impact.model');
 const fs =  require('fs');
 
 exports.create = async (req, res, next) => {
-    const { title, description, photo } = (req.body)
-
-    console.log('req.file.filename :>> ', req.file.filename);
+    
     try {
         const newImpact = new Impact({
-            ...req.body,
-            photo: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            title: req.body.title,
+            description: req.body.description,
+            photo: req.file.path
         });
         newImpact.save()
             .then(() => res.status(201).json({ message: 'Impact créé !' }))
@@ -23,11 +22,12 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res) => {
     try {
-        const updatedImpact = req.file ?
-            {
-                ...JSON.parse(req.body.thing),
-                photo: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            } : { ...req.body };
+        const impactPayload = {
+            ...req.body,
+            photo: req.file.path
+        };       
+        const updatedImpact = await Person.findByIdAndUpdate({_id: req.params.id}, impactPayload, {new: true});
+        
         Impact.updateOne({ _id: req.params.id }, { ...updatedImpact })
             .then(() => res.status(200).json({ message: 'Impact modifié avec succès !' }))
             .catch(error => res.status(400).json({ error }));

@@ -5,7 +5,7 @@ const { create, update, findAll, findOne} = require('../controllers/product.cont
 const { upload } = require ('../helpers/helper.js');
 
 router.post('/', auth, upload.single('photo'), create);
-router.put('/', auth, upload.single('photo'), update);
+router.put('/:id', auth, upload.single('photo'), update);
 router.get('/', auth, findAll);
 router.get('/:id', auth, findOne);
 
