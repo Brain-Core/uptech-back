@@ -27,7 +27,7 @@ app.use('/api/partner', require('./routes/partner.route'));
 app.use('/api/impact', require('./routes/impact.route'));
 
 app.get('/', async(req, res) => { 
-    res.send('Uptech-agro API responding successfully');
+    res.send('Uptech-agro API responding successfully ...');
 });
 
 app.listen(PORT, async () => {
