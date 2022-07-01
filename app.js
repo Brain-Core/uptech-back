@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4500;
 
 // app middleware
 app.use(express.json());
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(morgan('dev'));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({origin: `${process.env.CLIENT_URI}`}))
