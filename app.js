@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({origin: `${process.env.CLIENT_URI}`}))
 }
+app.use(cors({origin: '*'}))
 
 // middleware
 app.use('/api/auth/', require('./routes/auth.route'));
