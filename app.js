@@ -25,10 +25,10 @@ app.use('/api/products', require('./routes/product.route'));
 app.use('/api/team/', require('./routes/team.route'));
 app.use('/api/partner', require('./routes/partner.route'));
 app.use('/api/impact', require('./routes/impact.route'));
-app.use('/', (req, res) => {
-    res.status(200).json('Uptech-agro API responding successfully ...');
-});
 
+app.get('/', async(req, res) => { 
+    res.send('Uptech-agro API responding successfully');
+});
 
 app.listen(PORT, async () => {
     await console.log(`Server is running on port ${PORT}`);
